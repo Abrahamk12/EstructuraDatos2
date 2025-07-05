@@ -1,0 +1,15 @@
+C:\Users\Abraham\Documents\GitHub\EstructuraDatos2\ED2\bin\Debug\net8.0\ED2.exe
+C:\Users\Abraham\Documents\GitHub\EstructuraDatos2\ED2\bin\Debug\net8.0\ED2.deps.json
+C:\Users\Abraham\Documents\GitHub\EstructuraDatos2\ED2\bin\Debug\net8.0\ED2.runtimeconfig.json
+C:\Users\Abraham\Documents\GitHub\EstructuraDatos2\ED2\bin\Debug\net8.0\ED2.dll
+C:\Users\Abraham\Documents\GitHub\EstructuraDatos2\ED2\bin\Debug\net8.0\ED2.pdb
+C:\Users\Abraham\Documents\GitHub\EstructuraDatos2\ED2\obj\Debug\net8.0\ED2.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Abraham\Documents\GitHub\EstructuraDatos2\ED2\obj\Debug\net8.0\ED2.AssemblyInfoInputs.cache
+C:\Users\Abraham\Documents\GitHub\EstructuraDatos2\ED2\obj\Debug\net8.0\ED2.AssemblyInfo.cs
+C:\Users\Abraham\Documents\GitHub\EstructuraDatos2\ED2\obj\Debug\net8.0\ED2.csproj.CoreCompileInputs.cache
+C:\Users\Abraham\Documents\GitHub\EstructuraDatos2\ED2\obj\Debug\net8.0\ED2.sourcelink.json
+C:\Users\Abraham\Documents\GitHub\EstructuraDatos2\ED2\obj\Debug\net8.0\ED2.dll
+C:\Users\Abraham\Documents\GitHub\EstructuraDatos2\ED2\obj\Debug\net8.0\refint\ED2.dll
+C:\Users\Abraham\Documents\GitHub\EstructuraDatos2\ED2\obj\Debug\net8.0\ED2.pdb
+C:\Users\Abraham\Documents\GitHub\EstructuraDatos2\ED2\obj\Debug\net8.0\ED2.genruntimeconfig.cache
+C:\Users\Abraham\Documents\GitHub\EstructuraDatos2\ED2\obj\Debug\net8.0\ref\ED2.dll
