@@ -1,30 +1,44 @@
 ﻿namespace ED2;
 using System;
 
-class Programa
+class Program
 {
     static void Main(string[] args)
     {
         Grafo grafo = new Grafo();
 
-        grafo.AgregarArista("A", "B", 4);
-        grafo.AgregarArista("A", "C", 2);
-        grafo.AgregarArista("B", "C", 5);
-        grafo.AgregarArista("B", "D", 10);
-        grafo.AgregarArista("C", "E", 3);
-        grafo.AgregarArista("E", "D", 4);
-        grafo.AgregarArista("D", "F", 11);
+        // Crear personas
+        Persona p1 = new Persona("P001", "Ana", 30);
+        Persona p2 = new Persona("P002", "Luis", 25);
+        Persona p3 = new Persona("P003", "Carlos", 40);
 
-        grafo.MostrarGrafo();
+        // Agregar nodos al grafo
+        grafo.AgregarNodo(p1);
+        grafo.AgregarNodo(p2);
+        grafo.AgregarNodo(p3);
 
-        Console.WriteLine();
-        grafo.BFS("A");
+        // Conectar nodos
+        grafo.AgregarArista("P001", "P002", 10);
+        grafo.AgregarArista("P001", "P003", 5);
+        grafo.AgregarArista("P002", "P003", 2);
 
-        Console.WriteLine();
-        grafo.DFS("A");
+        // Mostrar todos los nodos y sus conexiones
+        foreach (var nodo in grafo.ObtenerTodosLosNodos())
+        {
+            Console.WriteLine($"Persona: {nodo.Datos.Nombre}, Edad: {nodo.Datos.Edad}");
+            foreach (var arista in nodo.Adyacentes)
+            {
+                Console.WriteLine($"  -> Conectado a: {arista.Destino.Datos.Nombre}, Peso: {arista.Peso}");
+            }
+        }
 
-        Console.WriteLine();
-        grafo.Dijkstra("A");
+        // Buscar un nodo específico
+        Console.WriteLine("\nBuscar nodo P002:");
+        var buscado = grafo.ObtenerNodo("P002");
+        if (buscado != null)
+        {
+            Console.WriteLine($"Nombre: {buscado.Datos.Nombre}, Edad: {buscado.Datos.Edad}");
+        }
     }
 }
 
