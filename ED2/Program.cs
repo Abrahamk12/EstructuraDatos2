@@ -5,46 +5,29 @@ class Programa
 {
     static void Main(string[] args)
     {
-        // Crear nodos
-        Nodo raiz = new Nodo("A");
-        Nodo b = new Nodo("B");
-        Nodo c = new Nodo("C");
-        Nodo d = new Nodo("D");
-        Nodo e = new Nodo("E");
-        Nodo f = new Nodo("F");
+        Grafo grafo = new Grafo();
 
-        // Construir el árbol
-        raiz.AgregarHijo(b);
-        raiz.AgregarHijo(c);
-        b.AgregarHijo(d);
-        b.AgregarHijo(e);
-        c.AgregarHijo(f);
+        grafo.AgregarArista("A", "B", 4);
+        grafo.AgregarArista("A", "C", 2);
+        grafo.AgregarArista("B", "C", 5);
+        grafo.AgregarArista("B", "D", 10);
+        grafo.AgregarArista("C", "E", 3);
+        grafo.AgregarArista("E", "D", 4);
+        grafo.AgregarArista("D", "F", 11);
 
-        // Imprimir estructura del árbol
-        Console.WriteLine("Estructura del árbol:");
-        raiz.Imprimir();
+        grafo.MostrarGrafo();
 
-        Console.WriteLine("Recorrido Preorden:");
-        raiz.RecorridoPreorden();
+        Console.WriteLine();
+        grafo.BFS("A");
 
-        Console.WriteLine("\nRecorrido Postorden:");
-        raiz.RecorridoPostorden();
+        Console.WriteLine();
+        grafo.DFS("A");
 
-        Console.WriteLine("\nRecorrido por Niveles:");
-        raiz.RecorridoPorNiveles();
-
-        
-        // Crear árbol binario
-        NodoBinario raizNB = new NodoBinario("B");
-        raizNB.Izquierdo = new NodoBinario("A");
-        raizNB.Derecho = new NodoBinario("C");
-
-        Console.WriteLine("Recorrido Inorden:");
-        raizNB.RecorridoInorden();// Salida esperada: A B C
-
-
+        Console.WriteLine();
+        grafo.Dijkstra("A");
     }
 }
+
 /*
 
 Desde la terminal, en la carpeta del proyecto:
