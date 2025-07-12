@@ -4,7 +4,7 @@ public class Persona
     public string Id { get; set; }
     public string Nombre { get; set; }
     public int Edad { get; set; }
-
+    public Persona(){}
     public Persona(string id, string nombre, int edad)
     {
         Id = id;
