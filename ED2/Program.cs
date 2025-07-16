@@ -2,87 +2,77 @@
 using System;
 using System.Collections;
 
+
+class HashTable
+{
+    private int size;
+    private List<KeyValuePair<int, string>>[] table;
+
+    public HashTable(int size)
+    {
+        this.size = size;
+        table = new List<KeyValuePair<int, string>>[size];
+        for (int i = 0; i < size; i++)
+        {
+            table[i] = new List<KeyValuePair<int, string>>();
+        }
+    }
+
+    // Función hash simple
+    private int HashFunction(int key)
+    {
+        return key % size;
+    }
+
+    // Insertar clave-valor
+    public void Insert(int key, string value)
+    {
+        int index = HashFunction(key);
+        table[index].Add(new KeyValuePair<int, string>(key, value));
+    }
+
+    // Buscar valor por clave
+    public string Search(int key)
+    {
+        int index = HashFunction(key);
+        foreach (var pair in table[index])
+        {
+            if (pair.Key == key)
+                return pair.Value;
+        }
+        return null;
+    }
+
+    // Mostrar tabla
+    public void Display()
+    {
+        for (int i = 0; i < size; i++)
+        {
+            Console.Write($"Índice {i}: ");
+            foreach (var pair in table[i])
+            {
+                Console.Write($"[{pair.Key} : {pair.Value}] ");
+            }
+            Console.WriteLine();
+        }
+    }
+}
+
+
 class Program
 {
     static void Main(string[] args)
     {
-        string nombre, continuar, opcion;
-        int j = 0, id = 0, edad;
+        HashTable ht = new HashTable(10);
 
-        Grafo grafo = new Grafo();
-        Console.WriteLine("Seleccione una opción: 1 para 5 datos, 2 para n datos");
-        opcion = Console.ReadLine();
-        switch (opcion)
-        {
-            case "1":
-                // Crear personas
-                Persona[] personas = new Persona[5];
-                for (int i = 0; i < personas.Length; i++)
-                {
-                    Console.Write("Ingrese el nombre de la persona: ");
-                    nombre = Console.ReadLine();
-                    Console.Write("Ingrese la edad de la persona: ");
-                    edad = int.Parse(Console.ReadLine());
-                    personas[i] = new Persona(id.ToString(), nombre, edad);
-                    grafo.AgregarNodo(personas[i]);
-                    id++;
-                    
-                }
-                break;
-            case "2":
-                ArrayList personasN = new ArrayList();
-                while (true)
-                {
-                    Console.Write("Ingrese el nombre de la persona: ");
-                    nombre = Console.ReadLine();
-                    Console.Write("Ingrese la edad de la persona: ");
-                    edad = int.Parse(Console.ReadLine());
-                    personasN.Add(new Persona(id.ToString(), nombre, edad));
-                    grafo.AgregarNodo(personasN[j] as Persona);
-                    Console.Write("¿Desea agregar otra persona? (s/n): ");
-                    if (Console.ReadLine().ToLower() != "s")
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        id++;
-                        j++;
-                            foreach (var nodo in grafo.ObtenerTodosLosNodos())
-                            {
-                                Console.WriteLine($"Persona: {nodo.Datos.Nombre}, Edad: {nodo.Datos.Edad}");
-                                foreach (var arista in nodo.Adyacentes)
-                                {
-                                    Console.WriteLine($"  -> Conectado a: {arista.Destino.Datos.Nombre}, Peso: {arista.Peso}");
-                                }
-                            }
-                    }
-                    
-                }
-                break;
-        }
-        
-        // Agregar nodos al grafo
-        /*
-        grafo.AgregarNodo(p1);
-        grafo.AgregarNodo(p2);
-        grafo.AgregarNodo(p3);
-        */
-        // Conectar nodos
-        /*
-        grafo.AgregarArista("P001", "P002", 10);
-        grafo.AgregarArista("P001", "P003", 5);
-        grafo.AgregarArista("P002", "P003", 2);
-        */
-        // Mostrar todos los nodos y sus conexiones
-        foreach (var nodo in grafo.ObtenerTodosLosNodos())
-        {
-            Console.WriteLine($"Persona: {nodo.Datos.Nombre}, Edad: {nodo.Datos.Edad}");
-            foreach (var arista in nodo.Adyacentes)
-            {
-                Console.WriteLine($"  -> Conectado a: {arista.Destino.Datos.Nombre}, Peso: {arista.Peso}");
-            }
-        }
+        ht.Insert(15, "Juan");
+        ht.Insert(25, "Ana");
+        ht.Insert(35, "Luis");
+        ht.Insert(5, "Carlos");
+
+        ht.Display();
+
+        Console.WriteLine("\nBuscar clave 25: " + ht.Search(25));
     }
 }
 

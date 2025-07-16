@@ -1,0 +1,88 @@
+tabla hash dinámica usando Dictionary
+
+class Program
+{
+    static void Main()
+    {
+        // Crear una tabla hash dinámica
+        Dictionary<int, string> tablaHash = new Dictionary<int, string>();
+
+        Console.Write("¿Cuántos elementos deseas insertar? ");
+        int n = int.Parse(Console.ReadLine());
+
+        for (int i = 0; i < n; i++)
+        {
+            Console.Write($"Clave #{i + 1}: ");
+            int clave = int.Parse(Console.ReadLine());
+
+            Console.Write($"Valor para la clave {clave}: ");
+            string valor = Console.ReadLine();
+
+            tablaHash[clave] = valor;
+        }
+
+        Console.WriteLine("\nContenido de la tabla hash:");
+        foreach (var par in tablaHash)
+        {
+            Console.WriteLine($"Clave: {par.Key}, Valor: {par.Value}");
+        }
+    }
+}
+
+ConcurrentDictionary<TKey, TValue>
+Similar a Dictionary, pero seguro para múltiples hilos (multithreading).
+Ideal para aplicaciones concurrentes o en servidores.
+using System;
+using System.Collections.Concurrent;
+
+class Program
+{
+    static void Main()
+    {
+        var tabla = new ConcurrentDictionary<int, string>();
+
+        tabla.TryAdd(1, "Uno");
+        tabla.TryAdd(2, "Dos");
+
+        Console.WriteLine(tabla[1]); // Imprime: Uno
+    }
+}
+
+Hashtable (clásico)
+Parte de System.Collections, anterior a Dictionary.
+Acepta claves y valores como object, por lo que no es genérico.
+Menos seguro y más lento que Dictionary.
+
+class Program
+{
+    static void Main()
+    {
+        Hashtable tabla = new Hashtable();
+
+        tabla["clave1"] = "valor1";
+        tabla[100] = "valor2";
+
+        Console.WriteLine(tabla["clave1"]); // Imprime: valor1
+    }
+}
+
+SortedDictionary<TKey, TValue>
+Similar a Dictionary, pero mantiene las claves ordenadas.
+Internamente usa un árbol binario balanceado (no hashing puro, pero útil para comparación).
+
+class Program
+{
+    static void Main()
+    {
+        var tabla = new SortedDictionary<int, string>();
+
+        tabla[3] = "Tres";
+        tabla[1] = "Uno";
+        tabla[2] = "Dos";
+
+        foreach (var item in tabla)
+        {
+            Console.WriteLine($"{item.Key} → {item.Value}");
+        }
+    }
+}
