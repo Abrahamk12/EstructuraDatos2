@@ -1,51 +1,96 @@
 ﻿namespace ED2;
 using System;
+using System.Collections;
 
 class Program
 {
     static void Main(string[] args)
     {
+        string nombre, continuar, opcion;
+        int j = 0, id = 0, edad;
+
         Grafo grafo = new Grafo();
+        Console.WriteLine("Seleccione una opción: 1 para 5 datos, 2 para n datos");
+        opcion = Console.ReadLine();
 
-        // Crear personas
-        Persona p1 = new Persona("P001", "Ana", 30);
-        Persona p2 = new Persona("P002", "Luis", 25);
-        Persona p3 = new Persona("P003", "Carlos", 40);
+        switch (opcion)
+        {
+            case "1":
+                // Crear personas con cantidad fija
+                Persona[] personas = new Persona[5];
+                for (int i = 0; i < personas.Length; i++)
+                {
+                    Console.Write("Ingrese el nombre de la persona: ");
+                    nombre = Console.ReadLine();
+                    Console.Write("Ingrese la edad de la persona: ");
+                    edad = int.Parse(Console.ReadLine());
+                    personas[i] = new Persona(id.ToString(), nombre, edad);
+                    grafo.AgregarNodo(personas[i]);
+                    id++;
+                }
+                break;
 
-        // Agregar nodos al grafo
-        grafo.AgregarNodo(p1);
-        grafo.AgregarNodo(p2);
-        grafo.AgregarNodo(p3);
+            case "2":
+                // Crear personas con cantidad dinámica
+                ArrayList personasN = new ArrayList();
+                while (true)
+                {
+                    Console.Write("Ingrese el nombre de la persona: ");
+                    nombre = Console.ReadLine();
+                    Console.Write("Ingrese la edad de la persona: ");
+                    edad = int.Parse(Console.ReadLine());
+                    personasN.Add(new Persona(id.ToString(), nombre, edad));
+                    grafo.AgregarNodo(personasN[j] as Persona);
 
-        // Conectar nodos
-        grafo.AgregarArista("P001", "P002", 10);
-        grafo.AgregarArista("P001", "P003", 5);
-        grafo.AgregarArista("P002", "P003", 2);
+                    Console.Write("¿Desea agregar otra persona? (s/n): ");
+                    if (Console.ReadLine().ToLower() != "s")
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        id++;
+                        j++;
+                    }
+                }
+                break;
+        }
 
-        // Mostrar todos los nodos y sus conexiones
+        // Crear relaciones aleatorias entre las personas
+        CrearRelacionesAleatorias(grafo);
+
+        // Mostrar nodos y conexiones
         foreach (var nodo in grafo.ObtenerTodosLosNodos())
         {
-            Console.WriteLine($"Persona: {nodo.Datos.Nombre}, Edad: {nodo.Datos.Edad}");
+            Console.WriteLine($"\nPersona: {nodo.Datos.Nombre}, Edad: {nodo.Datos.Edad}");
             foreach (var arista in nodo.Adyacentes)
             {
                 Console.WriteLine($"  -> Conectado a: {arista.Destino.Datos.Nombre}, Peso: {arista.Peso}");
             }
         }
+    }
 
-        // Buscar un nodo específico
-        Console.WriteLine("\nBuscar nodo P002:");
-        var buscado = grafo.ObtenerNodo("P002");
-        if (buscado != null)
+    static void CrearRelacionesAleatorias(Grafo grafo)
+    {
+        Random rand = new Random();
+        var nodos = new List<Nodo>(grafo.ObtenerTodosLosNodos());
+
+        for (int i = 0; i < nodos.Count; i++)
         {
-            Console.WriteLine($"Nombre: {buscado.Datos.Nombre}, Edad: {buscado.Datos.Edad}");
+            int relaciones = rand.Next(1, nodos.Count); // Número aleatorio de conexiones
+            HashSet<string> conectados = new HashSet<string>();
+
+            for (int j = 0; j < relaciones; j++)
+            {
+                int indiceAleatorio = rand.Next(nodos.Count);
+
+                if (indiceAleatorio != i && !conectados.Contains(nodos[indiceAleatorio].Datos.Id))
+                {
+                    int peso = rand.Next(1, 11); // Peso entre 1 y 10
+                    grafo.AgregarArista(nodos[i].Datos.Id, nodos[indiceAleatorio].Datos.Id, peso);
+                    conectados.Add(nodos[indiceAleatorio].Datos.Id);
+                }
+            }
         }
     }
 }
-
-/*
-
-Desde la terminal, en la carpeta del proyecto:
-dotnet build - copilar
-dotnet run - ejecutar
-
-*/
