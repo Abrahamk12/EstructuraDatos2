@@ -1,13 +1,10 @@
 ﻿namespace ED2;
 using System;
 using System.Collections;
-
-
 class HashTable
 {
     private int size;
     private List<KeyValuePair<int, string>>[] table;
-
     public HashTable(int size)
     {
         this.size = size;
@@ -16,63 +13,55 @@ class HashTable
         {
             table[i] = new List<KeyValuePair<int, string>>();
         }
-    }
 
-    // Función hash simple
-    private int HashFunction(int key)
+    }
+    private int Hashfunction(int key)
     {
         return key % size;
     }
 
-    // Insertar clave-valor
-    public void Insert(int key, string value)
+    public void Insert(int key, string _value)
     {
-        int index = HashFunction(key);
-        table[index].Add(new KeyValuePair<int, string>(key, value));
+        int index = Hashfunction(key);
+        table[index].Add(new KeyValuePair<int, string>(key, _value));
     }
-
-    // Buscar valor por clave
     public string Search(int key)
     {
-        int index = HashFunction(key);
+        int index = Hashfunction(key);
         foreach (var pair in table[index])
         {
             if (pair.Key == key)
+            {
                 return pair.Value;
+            }
         }
         return null;
     }
-
-    // Mostrar tabla
     public void Display()
     {
         for (int i = 0; i < size; i++)
         {
-            Console.Write($"Índice {i}: ");
+            Console.Write($"Index {i}: ");
             foreach (var pair in table[i])
             {
-                Console.Write($"[{pair.Key} : {pair.Value}] ");
+                Console.Write($"[{pair.Key}, {pair.Value}] ");
             }
             Console.WriteLine();
         }
     }
+
 }
-
-
 class Program
 {
     static void Main(string[] args)
     {
         HashTable ht = new HashTable(10);
-
-        ht.Insert(15, "Juan");
-        ht.Insert(25, "Ana");
-        ht.Insert(35, "Luis");
-        ht.Insert(5, "Carlos");
+        ht.Insert(0, "patata");
+        ht.Insert(1, "One");
+        ht.Insert(2, "Two");
+        ht.Insert(9, "Twelve");
 
         ht.Display();
-
-        Console.WriteLine("\nBuscar clave 25: " + ht.Search(25));
     }
 }
 
