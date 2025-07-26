@@ -1,10 +1,11 @@
 ﻿namespace ED2;
 using System;
-using System.Collections;
+
+using System;
 
 class Program
 {
-    static void QuickSort(int[] array, int left, int right)
+    static void QuickSort(string[] array, int left, int right)
     {
         if (left < right)
         {
@@ -14,14 +15,14 @@ class Program
         }
     }
 
-    static int Partition(int[] array, int left, int right)
+    static int Partition(string[] array, int left, int right)
     {
-        int pivot = array[right];
+        string pivot = array[right];
         int i = left - 1;
 
         for (int j = left; j < right; j++)
         {
-            if (array[j] <= pivot)
+            if (string.Compare(array[j], pivot, StringComparison.OrdinalIgnoreCase) <= 0)
             {
                 i++;
                 Swap(array, i, j);
@@ -32,20 +33,20 @@ class Program
         return i + 1;
     }
 
-    static void Swap(int[] array, int a, int b)
+    static void Swap(string[] array, int a, int b)
     {
-        int temp = array[a];
+        string temp = array[a];
         array[a] = array[b];
         array[b] = temp;
     }
 
     static void Main()
     {
-        int[] data = { 8, 3, 1, 7, 0, 10, 2 };
-        Console.WriteLine("Original array: " + string.Join(", ", data));
+        string[] data = { "Manzana", "pera", "Banana", "kiwi", "uva", "Durazno" };
+        Console.WriteLine("Arreglo original: " + string.Join(", ", data));
 
         QuickSort(data, 0, data.Length - 1);
 
-        Console.WriteLine("Sorted array: " + string.Join(", ", data));
+        Console.WriteLine("Arreglo ordenado: " + string.Join(", ", data));
     }
 }
