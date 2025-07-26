@@ -1,11 +1,19 @@
 ﻿namespace ED2;
 using System;
+class Persona
+{
+    public string Nombre { get; set; }
+    public int Edad { get; set; }
 
-using System;
+    public override string ToString()
+    {
+        return $"{Nombre} ({Edad} años)";
+    }
+}
 
 class Program
 {
-    static void QuickSort(string[] array, int left, int right)
+    static void QuickSort(Persona[] array, int left, int right)
     {
         if (left < right)
         {
@@ -15,14 +23,14 @@ class Program
         }
     }
 
-    static int Partition(string[] array, int left, int right)
+    static int Partition(Persona[] array, int left, int right)
     {
-        string pivot = array[right];
+        Persona pivot = array[right];
         int i = left - 1;
 
         for (int j = left; j < right; j++)
         {
-            if (string.Compare(array[j], pivot, StringComparison.OrdinalIgnoreCase) <= 0)
+            if (string.Compare(array[j].Nombre, pivot.Nombre, StringComparison.OrdinalIgnoreCase) <= 0)
             {
                 i++;
                 Swap(array, i, j);
@@ -33,20 +41,30 @@ class Program
         return i + 1;
     }
 
-    static void Swap(string[] array, int a, int b)
+    static void Swap(Persona[] array, int a, int b)
     {
-        string temp = array[a];
+        Persona temp = array[a];
         array[a] = array[b];
         array[b] = temp;
     }
 
     static void Main()
     {
-        string[] data = { "Manzana", "pera", "Banana", "kiwi", "uva", "Durazno" };
-        Console.WriteLine("Arreglo original: " + string.Join(", ", data));
+        Persona[] personas = {
+            new Persona { Nombre = "Carlos", Edad = 30 },
+            new Persona { Nombre = "Ana", Edad = 25 },
+            new Persona { Nombre = "Luis", Edad = 28 },
+            new Persona { Nombre = "Beatriz", Edad = 35 }
+        };
 
-        QuickSort(data, 0, data.Length - 1);
+        Console.WriteLine("Lista original:");
+        foreach (var p in personas)
+            Console.WriteLine(p);
 
-        Console.WriteLine("Arreglo ordenado: " + string.Join(", ", data));
+        QuickSort(personas, 0, personas.Length - 1);
+
+        Console.WriteLine("\nLista ordenada por nombre:");
+        foreach (var p in personas)
+            Console.WriteLine(p);
     }
 }
